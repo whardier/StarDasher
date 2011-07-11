@@ -1,7 +1,6 @@
 # Django settings for stardasher project.
 
 import os
-import sys
 
 # Can't import django.utils.translation yet
 _ = lambda s: s
@@ -142,6 +141,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
+    'concurrent_server',
     'django_extensions',
 )
 
