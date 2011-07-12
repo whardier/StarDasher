@@ -143,6 +143,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'concurrent_server',
     'django_extensions',
+    'stardasher.calls',
 )
 
 # A sample logging configuration. The only tangible logging
