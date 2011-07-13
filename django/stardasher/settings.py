@@ -143,8 +143,11 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'concurrent_server',
     'django_extensions',
+    'stardasher.accounts',
     'stardasher.calls',
 )
+
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
