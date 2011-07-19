@@ -40,14 +40,14 @@ class TagHash(models.Model):
 class CallDetailEvent(models.Model):
 
     #Always store as UTC naive
-    start = models.DateTimeField(null=True, blank=True) # Also seen as event time
+    start = models.DateTimeField(null=True, blank=True, db_index=True) # Also seen as event time
     #Always store as UTC naive
-    answer = models.DateTimeField(null=True, blank=True)
+    answer = models.DateTimeField(null=True, blank=True, db_index=True)
     #Always store as UTC naive
-    end = models.DateTimeField(null=True, blank=True)
+    end = models.DateTimeField(null=True, blank=True, db_index=True)
 
-    type_event = models.CharField(default='CDR', max_length=45) #Default to CDR
-    type_user_defined = models.CharField(max_length=45, null=True, blank=True)
+    event_type = models.CharField(default='CDR', max_length=45) #Default to CDR
+    event_type_user_defined = models.CharField(max_length=45, null=True, blank=True)
 
     callerid = models.ForeignKey(CallerID)
 
@@ -57,11 +57,11 @@ class CallDetailEvent(models.Model):
     context = models.CharField(max_length=80, null=True, blank=True)
 
     channel = models.CharField(max_length=240, null=True, blank=True) #Also seen as channname for event data
-    channel_tech = models.CharField(max_length=45, null=True, blank=True)
+    channel_tech = models.SmallIntegerField(null=True, blank=True)
     channel_counter = models.IntegerField() #Index with channel
 
     channel_destination = models.CharField(max_length=240, null=True, blank=True)
-    channel_destination_tech = models.CharField(max_length=45, null=True, blank=True)
+    channel_destination_tech = models.SmallIntegerField(null=True, blank=True)
     channel_destination_counter = models.IntegerField() #Index with channel_destination
 
     application = models.CharField(max_length=80, null=True, blank=True)
@@ -84,6 +84,8 @@ class CallDetailEvent(models.Model):
 
     peer = models.CharField(max_length=80, null=True, blank=True)
 
-    batch = models.ForeignKey(Batch)
-    
+    origin_id = models.IntegerField(null=True, blank=True, db_index=True)
+    origin_sync_key = models.CharField(max_length=255, null=True, blank=True)
+
+    batch = models.ForeignKey(Batch)    
     tag_hash = models.ForeignKey(TagHash)
